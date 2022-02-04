@@ -1,30 +1,4 @@
-#!/usr/bin/env bashio
-
-if bashio::services.available mqtt; then
-  echo "mqtt found in this Home Assistance instance."
-  MQTT_HOST=$(bashio::services mqtt "host")
-  MQTT_PORT=$(bashio::services mqtt "port")
-  export MQTT_USERNAME=$(bashio::services mqtt "username")
-  export MQTT_PASSWORD=$(bashio::services mqtt "password")
-else
-  echo "Using an external mqtt broker."
-  MQTT_HOST=$(bashio::config "mqtt_host")
-  MQTT_PORT=$(bashio::config "mqtt_port")
-  export MQTT_USERNAME=$(bashio::config "mqtt_user")
-  export MQTT_PASSWORD=$(bashio::config "mqtt_password")
-fi
-
-RTL_TOPIC=$(bashio::config "rtl_topic")
-DISCOVERY_PREFIX=$(bashio::config "discovery_prefix")
-DISCOVERY_INTERVAL=$(bashio::config "discovery_interval")
-
-OTHER_ARGS=""
-if bashio::config.true "mqtt_retain"; then
-  OTHER_ARGS="${OTHER_ARGS} --retain"
-fi
-if bashio::config.true "force_update"; then
-  OTHER_ARGS="${OTHER_ARGS} --force_update"
-fi
+#!/usr/bin/sh
 
 echo "Starting rtl_433_mqtt_hass.py..."
-python3 -u /rtl_433_mqtt_hass.py -d -H $MQTT_HOST -p $MQTT_PORT -R "$RTL_TOPIC" -D "$DISCOVERY_PREFIX" -i $DISCOVERY_INTERVAL $OTHER_ARGS
+python3 -u /rtl_433_mqtt_hass.py -d
