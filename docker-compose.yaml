@@ -7,7 +7,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
     environment:
-      MQTT_HOSTNAME: 127.0.0.1
+      MQTT_HOST: 127.0.0.1
       MQTT_USERNAME: yourUser
       MQTT_PASSWORD: yourPassword
       DISCOVERY_PREFIX: homeassistant
