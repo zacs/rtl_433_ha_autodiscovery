@@ -1,0 +1,14 @@
+version: '3'
+services:
+  rtl_433_ha_autodiscovery:
+    build: .
+    restart: always
+    container_name: rtl_433_ha_autodiscovery
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      MQTT_HOSTNAME: 127.0.0.1
+      MQTT_USERNAME: yourUser
+      MQTT_PASSWORD: yourPassword
+      DISCOVERY_PREFIX: homeassistant
+      RTL_TOPIC: "rtl_433/+/events"

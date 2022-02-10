@@ -673,7 +673,4 @@ if __name__ == "__main__":
     if not args.password and 'MQTT_PASSWORD' in os.environ:
         args.password = os.environ['MQTT_PASSWORD']
 
-    if not args.password and 'MQTT_HOST' in os.environ:
-        args.host = os.environ['MQTT_HOST']
-
     run()
